@@ -8,10 +8,10 @@ The main features of the mViewerJS is to help in the visualization of files like
 - Visualization while playing MIDI files
 
  Libraries used in the project are:
- - <a src="https://github.com/bahadirdogru/Turn.js-5/tree/master"> bahadirdogru / Turn.js-5 </a>
- - <a src="https://github.com/dearhive/dearflip-js-flipbook"> dearhive / dearflip-js-flipbook </a>
- - <a src="https://github.com/jazz-soft/JZZ"> jazz-soft / JZZ </a>
- - <a src="https://github.com/markedjs/marked"> markedjs / marked </a>
- - <a src="https://github.com/fengyuanchen/viewerjs"> fengyuanchen / viewerjs </a>
+ - <a href="https://github.com/bahadirdogru/Turn.js-5/tree/master"> bahadirdogru / Turn.js-5 </a>
+ - <a href="https://github.com/dearhive/dearflip-js-flipbook"> dearhive / dearflip-js-flipbook </a>
+ - <a href="https://github.com/jazz-soft/JZZ"> jazz-soft / JZZ </a>
+ - <a href="https://github.com/markedjs/marked"> markedjs / marked </a>
+ - <a href="https://github.com/fengyuanchen/viewerjs"> fengyuanchen / viewerjs </a>
 
  
