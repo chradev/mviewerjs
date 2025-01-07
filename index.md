@@ -39,11 +39,14 @@ PowerPoint and video presentations with photos of animal farms and a videos base
     - <a href="./mviewerjs.html?pMode=2&pTime=2000&file=./farm-animals/FarmAnimals-big.pdf&title=Big slide show">without music accompaniment</a>
     - <a href="./mviewerjs.html?&mp3=./books/mp3s/Bond, Quixote.mp3&stt=30&title=No slide show">MP3 sound file only</a>
     - <a href="./mviewerjs.html?&mp3=./books/mids/Mozart, Symphony No. 40 in g minor, Molto allegro.mid&title=No slide show">MIDI sound file only</a>
+    - <a href="./mviewerjs.html?file=./books/mds/README.md&title=Adroid%20-%20the%20open%20S.T.E.A.M.%20robot%20platform">Show Adroid README.md</a>
+
+
+- Test links not working because of PHP lack:
     - <a href="./books/mids/AllMIDIs.php">List of MIDI files (can be downloaded only)</a>
     - <a href="./books/mp3s/AllMP3s.php">List of MP3 files (can be played with built-in html audio tag)</a>
     - <a href="./books/pdfs/AllFiles.php">List of all files in PDF folder (PDF files can be played with built-in Adobe PDF viewer)</a>
     - <a href="./books/pdfs/AllPDFs-ViewerJS.php">List of all PDF files with link to ViewerJS (with full screen slide show feature)</a>
     - <a href="./books/pdfs/AllPDFs-mViewerJS.php">List of all PDF files with link to mViewerJS (with MIDI play accompaniment)</a>
-    - <a href="./mviewerjs.html?file=./books/mds/README.md&title=Adroid%20-%20the%20open%20S.T.E.A.M.%20robot%20platform">Show Adroid README.md</a>
 
 
