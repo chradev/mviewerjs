@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <title></title>
+		<link rel="shortcut icon" type="image/png" href="./libs/dflip/images/dflip.ico">
+        <!-- Flipbook StyleSheet -->
+        <link href="./libs/dflip/css/dflip.min.css" rel="stylesheet" type="text/css">
+        <!-- Icons Stylesheet -->
+        <link href="./libs/dflip/css/themify-icons.min.css" rel="stylesheet" type="text/css">
+
+        <!-- Cannot be loaded by JavaScrip -->
+        <script src="https://cdn.jsdelivr.net/npm/jzz"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jzz-synth-tiny"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jzz-input-kbd"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jzz-midi-smf"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jzz-gui-player"></script>
+        <script src="https://code.jquery.com/jquery-3.5.0.js""></script>
+
+        <style>
+            h2 { margin: 8px; }
+            .common_table{ display:table; }
+            .common_table DIV{ display:table-row;}
+            .common_table DIV DIV{ display:table-column; float : left;}
+            .table {display:block; }
+            .row { display:block;}
+            .cell {display:inline-block;}
+        </style>
+	</head>
+	<body>
+        <!-- Staff to show MD content -->
+		<div style="display: inline-block; position: fixed; top: 0; bottom: 0; left: 0; right: 0; width: 200px; height: 100px; margin: auto; font-size: 22px; font-weight: bold;" id="loading">Loading ...</div>
+		<textarea theme="cerulean-chr" style="display:none;" id="content"></textarea>
+
+        <!-- Staff to show Normal FLipbook -->
+        <div class="container">
+              <div class="_df_book" height="800" webgl="true" backgroundcolor="white"" source="" id="df_manual_book"></div>
+        </div>
+
+        <!-- Staff to show audio player and note -->
+        <div class="table">
+           <div class="row">
+              <div class="cell">
+                  <audio id="audio" preload="auto" controls autobuffer autoplay style="display:none;"></audio>
+                  <div id=midiplayer style="display:none;"></div>
+              </div>
+              <div class="cell">
+                  <div id='note'></div>
+              </div>
+           </div>
+        </div>
+        <br>
+        <div id=staff class="common_table" style="width: 100%; height: 100%;">
+          <div><div id=piano0></div><div><h2 id='log0'></h2></div><br></div>
+          <div><div id=piano1></div><div><h2 id='log1'></h2></div><br></div>
+          <div><div id=piano2></div><div><h2 id='log2'></h2></div><br></div>
+          <div><div id=piano3></div><div><h2 id='log3'></h2></div><br></div>
+          <div><div id=piano4></div><div><h2 id='log4'></h2></div><br></div>
+          <div><div id=piano5></div><div><h2 id='log5'></h2></div><br></div>
+          <div><div id=piano6></div><div><h2 id='log6'></h2></div><br></div>
+          <div><div id=piano7></div><div><h2 id='log7'></h2></div><br></div>
+          <div><div id=piano8></div><div><h2 id='log8'></h2></div><br></div>
+          <div><div id=piano9></div><div><h2 id='log9'></h2></div><br></div>
+          <div><div id=pianoa></div><div><h2 id='log10'></h2></div><br></div>
+          <div><div id=pianob></div><div><h2 id='log11'></h2></div><br></div>
+          <div><div id=pianoc></div><div><h2 id='log12'></h2></div><br></div>
+          <div><div id=pianod></div><div><h2 id='log13'></h2></div><br></div>
+          <div><div id=pianoe></div><div><h2 id='log14'></h2></div><br></div>
+          <div><div id=pianof></div><div><h2 id='log15'></h2></div><br></div>
+        </div>
+	</body>
+	<script>
+		function getParameterByName(name) {
+			var url = window.location.href;
+			var regex = new RegExp("[?&]" + name.replace(/[\[\]]/g, "\\$&") + "(=([^&#]*)|&|#|$)");
+			var results = regex.exec(url);
+			if(!results) { return null; }
+			if(results[2] === '') { return null; }
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+		var xmlHttp = null;
+		var title = getParameterByName('title');
+		var file  = getParameterByName('file');
+		var mp3   = getParameterByName('mp3');
+		var stt   = getParameterByName('stt');
+		var pMode = getParameterByName('pMode');
+		var pTime = getParameterByName('pTime');
+
+		if(title !== null) { document.title = title;}
+    	var noteElement = document.getElementById('note');
+		if(file !== null) {
+			var fileName = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'));
+			var fileExt = file.substring(file.lastIndexOf('.') + 1);
+
+            if (fileExt === 'md') {
+        		if(window.XMLHttpRequest) {
+        			// code for IE7+, Firefox, Chrome, Opera, Safari
+        			xmlHttp = new XMLHttpRequest();
+        		}
+        		else {
+        			// code for IE6, IE5
+        			xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+        		}
+
+        		xmlHttp.onreadystatechange = function() {
+        			if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        				var content = document.getElementById('content');
+                        content.innerHTML = xmlHttp.responseText;
+
+        				var strapDownScriptElement = document.createElement('script');
+        				strapDownScriptElement.setAttribute('src', './libs/markdown/strapdown.js');
+        				document.head.appendChild(strapDownScriptElement);
+        			}
+        		};
+        		xmlHttp.open('GET', file + '?' + new Date().getTime(), true);
+        		xmlHttp.send();
+            } else if (fileExt === 'pdf') {
+   				var df_manual_book = document.getElementById('df_manual_book');
+                df_manual_book.setAttribute('source', file);
+
+  				var strapDownScriptElement = document.createElement('script');
+  				strapDownScriptElement.setAttribute('src', './libs/dflip/js/dflip.min.js');
+  				document.head.appendChild(strapDownScriptElement);
+            }
+		}
+		if(mp3 !== null) {
+			mp3Name = mp3.substring(mp3.lastIndexOf('/') + 1, mp3.lastIndexOf('.'));
+			mp3Ext = mp3.substring(mp3.lastIndexOf('.') + 1);
+
+            if (mp3Ext === 'mp3') {
+   				var audioElement = document.getElementById('audio');
+                audioElement.style.display = '';
+
+                // add sources to audio element - ready for multifile use case
+  				audoSourceElement = document.createElement('source'); 
+  				audoSourceElement.setAttribute('class', 'active');
+  				audoSourceElement.setAttribute('type', 'audio/mpeg');
+                var mp3Source = stt ? mp3 + '#t=' + stt : mp3;
+  				audoSourceElement.setAttribute('src', mp3Source);
+  				audioElement.appendChild(audoSourceElement);
+
+                audioElement.addEventListener('ended', function(e){
+                  var activeSource = document.querySelector('#audio source.active');
+                  var nextSource = document.querySelector('#audio source.active + source') 
+                                  || document.querySelector('#audio source:first-child');
+                  // deactivate current source, and activate the next one
+                  activeSource.className = '';
+                  nextSource.className = 'active';
+                  // update the audio source and start playback
+                  audioElement.src = nextSource.src;
+                  audioElement.play();
+                })
+
+                var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+                noteElement.innerHTML = '&nbsp;&nbsp;<b>' + mp3Name + "</b>";
+                if (file !== null) {
+                    noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book and/or the music.";
+                }
+            } else if (mp3Ext === 'mid') {
+   				var midiPlayerElement = document.getElementById('midiplayer');
+                midiPlayerElement.style.display = '';
+                // Create MIDI player
+                JZZ.synth.Tiny.register('Web Audio');
+                var out = new JZZ().openMidiOut();
+                var player = new JZZ.gui.Player({at: 'midiplayer', midi: false, file: true, link: false });
+                // Load MIDI file and start playing
+                try {
+                  var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                      if (this.status == 200) {
+                        var r, i;
+                        var data = '';
+                        r = xhttp.response;
+                        if (r instanceof ArrayBuffer) {
+                          r = new Uint8Array(r);
+                          for (i = 0; i < r.length; i++) data += String.fromCharCode(r[i]);
+                        } else { // for really antique browsers
+                          r = xhttp.responseText;
+                          for (i = 0; i < r.length; i++) data += String.fromCharCode(r.charCodeAt(i) & 0xff);
+                        }
+                        var smf = new JZZ.MIDI.SMF(data);
+                        player.stop();
+                        player.load(smf);
+                        player.loop(true);
+                        player.play();
+                      }
+                      else {
+                        console.log('XMLHttpRequest error');
+                      }
+                    }
+                  };
+                  try { xhttp.responseType = 'arraybuffer'; } catch (e) {}
+                  xhttp.overrideMimeType('text/plain; charset=x-user-defined');
+                  xhttp.open('GET', mp3, true);
+                  xhttp.send();
+                }
+                catch (e) {
+                    console.log('XMLHttpRequest error');
+                }
+                if (file !== null) {
+                    var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+                } else {
+                    // Create 16 interactive keyboards and connect them to MIDI player
+                    var body = document.body;
+                    var html = document.documentElement; 
+                    var bodyH = Math.max(body.scrollHeight, body.offsetHeight, body.getBoundingClientRect().height, html.clientHeight, html.scrollHeight, html.offsetHeight);
+                    var bodyW = body.getBoundingClientRect().width;
+                    let wl = Math.floor((bodyH - 200) / 15);
+                    let ww = Math.floor((bodyW - 150) / 48);
+                    let bl = Math.floor(wl * 3 / 4);
+                    let bw = Math.floor(ww / 2);
+                    let from = 'C2';
+                    let to   = 'B8';
+
+                    var piano0 = JZZ.input.Kbd({at: 'piano0', chan: 0, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano1 = JZZ.input.Kbd({at: 'piano1', chan: 1, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano2 = JZZ.input.Kbd({at: 'piano2', chan: 2, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano3 = JZZ.input.Kbd({at: 'piano3', chan: 3, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano4 = JZZ.input.Kbd({at: 'piano4', chan: 4, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano5 = JZZ.input.Kbd({at: 'piano5', chan: 5, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano6 = JZZ.input.Kbd({at: 'piano6', chan: 6, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano7 = JZZ.input.Kbd({at: 'piano7', chan: 7, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano8 = JZZ.input.Kbd({at: 'piano8', chan: 8, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var piano9 = JZZ.input.Kbd({at: 'piano9', chan: 9, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var pianoa = JZZ.input.Kbd({at: 'pianoa', chan: 10, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var pianob = JZZ.input.Kbd({at: 'pianob', chan: 11, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var pianoc = JZZ.input.Kbd({at: 'pianoc', chan: 12, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var pianod = JZZ.input.Kbd({at: 'pianod', chan: 13, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var pianoe = JZZ.input.Kbd({at: 'pianoe', chan: 14, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+                    var pianof = JZZ.input.Kbd({at: 'pianof', chan: 15, from: from, to: to, wl: wl, ww: ww, bl: bl, bw: bw}).and(function(){ this.getKeys().setStyle({ borderColor:'#888', borderBottomLeftRadius:'6px', borderBottomRightRadius:'6px' }) });
+
+                    var out = new JZZ().openMidiOut();
+                    piano0.connect(piano1);
+                    piano1.connect(piano2);
+                    piano2.connect(piano3);
+                    piano3.connect(piano4);
+                    piano4.connect(piano5);
+                    piano5.connect(piano6);
+                    piano6.connect(piano7);
+                    piano7.connect(piano8);
+                    piano8.connect(piano9);
+                    piano9.connect(pianoa);
+                    pianoa.connect(pianob);
+                    pianob.connect(pianoc);
+                    pianoc.connect(pianod);
+                    pianod.connect(pianoe);
+                    pianoe.connect(pianof);
+                    pianof.connect(out);
+                    player.connect(piano0);
+                                  
+                    for (var i=0; i<16; i++) {
+                      let log = document.getElementById("log" + i);
+                      log.style.fontSize = "16px";
+                      log.innerHTML = 'Channel ' + i;
+                    }
+                }
+                printNote();
+
+                // Start playing after file load from player's open button
+                player.onLoad = function (smf) {
+                    printNote();
+                    player.play();
+                }
+
+                function printNote() {
+                  let fileMIDI = player.fileInput.files[0];
+                  let msg = '';
+                  if (fileMIDI) {
+                    msg = fileMIDI.name.substring(0, fileMIDI.name.lastIndexOf('.')) + ' (' + formatByteSize(fileMIDI.size) + ')'  + ' - duration: ';
+                  } else {
+                    msg = mp3Name + ' - duration: ';
+                  }
+                  noteElement.innerHTML = '&nbsp;&nbsp;<b>' + msg + msToTime(player.durationMS()) + '</b>';
+                  if (file !== null) {
+                      var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+                      noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book and/or the music.";
+                  }
+                }
+
+                function formatByteSize(bytes) {
+                    if(bytes < 1024) return bytes + " B";
+                    else if(bytes < 1048576) return(bytes / 1024).toFixed(1) + " kB";
+                    else if(bytes < 1073741824) return(bytes / 1048576).toFixed(1) + " MB";
+                    else return(bytes / 1073741824).toFixed(1) + " GB";
+                };
+
+                function msToTime(duration) {
+                  var milliseconds = Math.floor((duration % 1000) / 100),
+                    seconds = Math.floor((duration / 1000) % 60),
+                    minutes = Math.floor((duration / (1000 * 60)) % 60),
+                    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+                  hours = (hours < 10) ? "0" + hours : hours;
+                  minutes = (minutes < 10) ? "0" + minutes : minutes;
+                  seconds = (seconds < 10) ? "0" + seconds : seconds;
+                  return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+                }
+            } else {
+                var option_df_manual_book = {soundEnable: true, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+                noteElement.innerHTML = "&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book";
+            }
+		} else if (fileExt === 'pdf') {
+            var option_df_manual_book = {soundEnable: true, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+            noteElement.innerHTML = "&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book.";
+        }
+		document.getElementById('loading').style.display = 'none';
+	</script>
+</html>
+
