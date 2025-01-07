@@ -1,5 +1,5 @@
 #  mViewerJS 
-This is a project for a web multi-viewer written entirely in HTML and JavaScript. There are some more staff included in the current project. There are also some 3-rd party libraries with separate licensing. Some of the materials included are intended for children, and others are the result of my many years of work as a professional in the fields of physics, engineering, computer science and information technology.
+This is a project for a web multi-viewer written entirely in HTML and JavaScript. There are some more staff included in the current project. There are also some 3-rd party libraries with separate licensing. Some of the materials included are intended for children, and others are the result of my many years of work as a professional in the fields of physics, engineering, computer sciences and information technologies.
 
 The main features of the mViewerJS is to help in the visualization of files like MD, PDF, MIDI, etc. The visualization is supported by a single file,  mviewerjs.html and includes:
 - Markdown viewer
