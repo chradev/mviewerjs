@@ -14,4 +14,6 @@ The main features of the mViewerJS is to help in the visualization of files like
  - <a href="https://github.com/markedjs/marked"> markedjs / marked </a>
  - <a href="https://github.com/fengyuanchen/viewerjs"> fengyuanchen / viewerjs </a>
 
+
+Find demo on: <a href="https://chradev.github.io/mviewerjs/">https://chradev.github.io/mviewerjs/</a>
  
