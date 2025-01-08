@@ -1,7 +1,8 @@
 ### Children books (2024)
 Web application to watch the books made by children, based on images
 
-- <a href="./theLittleMermaid/index.html" target="Main">Watch the book "The Little Mermaid" by Margaux Poncet (interactive web application)</a>
+- <a href="./theLittleMermaid/index.html">Watch the book "The Little Mermaid" by Margaux Poncet (interactive web application based on TurnJS)</a>
+- <a href="https://www.radevs.net/chradev/projects/mViewerJS/mviewerjs.html?pMode=2&pTime=2000&mp3=./books/mids/Mozart,%20Symphony%20No.%2040%20in%20g%20minor,%20Molto%20allegro.mid&title=Slide%20Show:%20theLittleMermaid.pdf&file=./books/pdfs/theLittleMermaid.pdf">Watch the book "The Little Mermaid" by Margaux Poncet (interactive web application based on dFlip)</a>
 
 
 ### Piano applications (2021)
