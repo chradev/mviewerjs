@@ -20,7 +20,7 @@ PowerPoint and video presentations with photos of animal farms and a videos base
 ### Experimental staff with media content web viewers (2025)
 A special HTML / JavaScript multi-viewer <a href="https://github.com/chradev/mviewerjs/" target="_lank">mViewerJS</a> is developed and can be tested with the following links: 
 
-- <a href="./mViewerJS/mviewerjs.html?pMode=2&pTime=5000&mp3=./books/mids/Under_The_Sea_From_The_Little_Mermaid.mid&title=Slide%20Show:%20theLittleMermaid.pdf&file=./books/pdfs/theLittleMermaid.pdf">Watch the book "The Little Mermaid" by Margaux Poncet (interactive web application based on dFlip)</a>
+- <a href="./mviewerjs.html?pMode=2&pTime=5000&file=./books/pdfs/theLittleMermaid.pdf&mp3=./books/mids/Under_The_Sea_From_The_Little_Mermaid.mid&title=The Little Mermaid">Watch the book "The Little Mermaid" by Margaux Poncet (interactive dFlip based web application)</a>
 
 
 - Interactive PDF Slideshow (Flip Book) by mViewerJS with MP3 sound, from PPP with embedded:
