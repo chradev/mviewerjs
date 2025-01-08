@@ -182,9 +182,11 @@
                           for (i = 0; i < r.length; i++) data += String.fromCharCode(r.charCodeAt(i) & 0xff);
                         }
                         var smf = new JZZ.MIDI.SMF(data);
+                        player.pause();
                         player.stop();
                         player.load(smf);
                         player.loop(true);
+                        player.pause();
                         player.play();
                       }
                       else {
