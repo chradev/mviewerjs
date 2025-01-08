@@ -25,7 +25,6 @@ PowerPoint and video presentations with photos of animal farms and a videos base
 
 
 - Test links for mViewerJS and ViewerJS:
-    - <a href="./mviewerjs.html?pMode=2&pTime=5000&file=./books/pdfs/Bulgaria.pdf&mp3=./books/pdfs/Bulgaria.mp3&title=Bulgaria">Bulgaria PDF slide show with sound</a>
     - <a href="./mviewerjs.html?pMode=2&pTime=2000&file=./books/pdfs/AllCases.pdf&mp3=./books/mids/Mozart, Symphony No. 40 in g minor, Molto allegro.mid&title=Big slide show">with MIDI sound files accompaniment</a>
     - <a href="./mviewerjs.html?pMode=2&pTime=2000&file=./farm-animals/FarmAnimals-big.pdf&title=Big slide show">without music accompaniment</a>
     - <a href="./mviewerjs.html?&mp3=./books/mp3s/Bond, Quixote.mp3&stt=30&title=No slide show">MP3 sound file only</a>
@@ -43,6 +42,7 @@ PowerPoint and video presentations with photos of animal farms and a videos base
 
 
 - Links not working because of GitHul limitation for large files:
+    - <a href="./mviewerjs.html?pMode=2&pTime=5000&file=./books/pdfs/Bulgaria.pdf&mp3=./books/pdfs/Bulgaria.mp3&title=Bulgaria">Bulgaria PDF slide show with sound</a>
     - Interactive PP presentations with embedded: <a href="./farm-animals/FarmAnimals.pptx" target="Main">sound files only</a>, <a href="./farm-animals/FarmAnimals-big.pptx" target="Main">video and sound files</a>
     - MPEG video, 800x600 with embedded: <a href="./farm-animals/FarmAnimals.mp4" target="Main">sound files only (12:19)</a>, <a href="./farm-animals/FarmAnimals-big.mp4" target="Main">video and sound files (8.39)</a>
     - MPEG video, 1600x1200 with embedded: <a href="./farm-animals/FarmAnimals-hd.mp4" target="Main">sound files only (12:19)</a>, <a href="./farm-animals/FarmAnimals-big-hd.mp4" target="Main">video and sound files (9:22)</a>
