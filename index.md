@@ -1,3 +1,5 @@
+## Children Projects
+
 #### Animals Farm presentations (2021)
 PowerPoint presentations with photos of animal farms and a videos based thereon:
 
@@ -17,7 +19,7 @@ Web application to present the books made by children, based on images:
 - Watch the book "<a href="./theLittleMermaid/index.html">The Little Mermaid</a>" by Margaux Poncet, 2023 (web application based on TurnJS)
 
 
-#### Experimental staff with media content web viewers (2025)
+## Experimental staff with media content web viewers (2025)
 A special HTML / JavaScript multi-viewer <a href="https://github.com/chradev/mviewerjs/" target="_lank">mViewerJS</a> is developed and can be tested with the following links: 
 
 - Watch the book "<a href="./mviewerjs.html?pMode=2&pTime=5000&file=./books/pdfs/theLittleMermaid.pdf&mp3=./books/mids/Under_The_Sea_From_The_Little_Mermaid.mid&title=The Little Mermaid">The Little Mermaid</a>" by Margaux Poncet, 2023 (based on dFlip with MIDI sound)
