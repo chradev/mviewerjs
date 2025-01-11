@@ -8,12 +8,12 @@ The main features of the mViewerJS is to help in the visualization of files like
 - Visualization while playing MIDI files
 
  The following libraries are used in the project:
- - <a href="https://github.com/bahadirdogru/Turn.js-5/tree/master"> bahadirdogru / Turn.js-5 </a>
- - <a href="https://github.com/dearhive/dearflip-js-flipbook"> dearhive / dearflip-js-flipbook </a>
- - <a href="https://github.com/jazz-soft/JZZ"> jazz-soft / JZZ </a>
- - <a href="https://github.com/markedjs/marked"> markedjs / marked </a>
- - <a href="https://github.com/fengyuanchen/viewerjs"> fengyuanchen / viewerjs </a>
+ - <a href="https://github.com/bahadirdogru/Turn.js-5/tree/master" target="_blank"> bahadirdogru / Turn.js-5 </a>
+ - <a href="https://github.com/dearhive/dearflip-js-flipbook" target="_blank"> dearhive / dearflip-js-flipbook </a>
+ - <a href="https://github.com/jazz-soft/JZZ" target="_blank"> jazz-soft / JZZ </a>
+ - <a href="https://github.com/markedjs/marked" target="_blank"> markedjs / marked </a>
+ - <a href="https://github.com/fengyuanchen/viewerjs" target="_blank"> fengyuanchen / viewerjs </a>
 
 
-Find demo on: <a href="https://chradev.github.io/mviewerjs/">https://chradev.github.io/mviewerjs/</a>
+Find demo on: <a href="https://chradev.github.io/mviewerjs/" target="_blank">https://chradev.github.io/mviewerjs/</a>
  
