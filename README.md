@@ -11,6 +11,7 @@ The main features of the mViewerJS is to help in the visualization of files like
  - <a href="https://github.com/bahadirdogru/Turn.js-5/tree/master" target="_blank"> bahadirdogru / Turn.js-5 </a>
  - <a href="https://github.com/dearhive/dearflip-js-flipbook" target="_blank"> dearhive / dearflip-js-flipbook </a>
  - <a href="https://github.com/jazz-soft/JZZ" target="_blank"> jazz-soft / JZZ </a>
+ - <a href="https://github.com/hvianna/audioMotion-analyzer/tree/master" target="_blank"> hvianna / audioMotion-analyzer </a>
  - <a href="https://github.com/markedjs/marked" target="_blank"> markedjs / marked </a>
  - <a href="https://github.com/fengyuanchen/viewerjs" target="_blank"> fengyuanchen / viewerjs </a>
 
