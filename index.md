@@ -49,3 +49,4 @@ A special HTML / JavaScript multi-viewer <a href="https://github.com/chradev/mvi
     - <a href="./libs/ViewerJS/#../../books/pdfs/ExperianceSources.pdf" target="_blank">"Sources of the professional experience" by Christo Radev</a>
     - <a href="./libs/ViewerJS/#../../books/pdfs/AllCases.pdf" target="_blank">"Science Engineering and Extreme Testing" by Christo Radev</a>
 
+***Note:*** In case of problem to hear the sound, please, return back to this page and click on the link again!
