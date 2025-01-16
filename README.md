@@ -5,7 +5,7 @@ The main features of the mViewerJS is to help in the visualization of files like
 - Markdown viewer
 - PDF flip book viewer based on dFlip and ViewerJS libraries
 - MP3 and MIDI support for PDF flip book visualization based on dFlip
-- Visualization while playing MIDI files
+- Visualization while playing MP3 and MIDI files
 
  The following libraries are used in the project:
  - <a href="https://github.com/bahadirdogru/Turn.js-5/tree/master" target="_blank"> bahadirdogru / Turn.js-5 </a>
