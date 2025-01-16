@@ -169,14 +169,18 @@
         		xmlHttp.open('GET', file + '?' + new Date().getTime(), true);
         		xmlHttp.send();
             } else if (fileExt === 'pdf') {
-   				var df_manual_book = document.getElementById('df_manual_book');
+		var df_manual_book = document.getElementById('df_manual_book');
                 df_manual_book.setAttribute('source', file);
 
-  				var strapDownScriptElement = document.createElement('script');
-  				strapDownScriptElement.setAttribute('src', './libs/dflip/js/dflip.min.js');
-  				document.head.appendChild(strapDownScriptElement);
+		var strapDownScriptElement = document.createElement('script');
+		strapDownScriptElement.setAttribute('src', './libs/dflip/js/dflip.min.js');
+		document.head.appendChild(strapDownScriptElement);
 
-                var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+              	if(mp3 !== null) {
+                    var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+                } else {
+                    var option_df_manual_book = {soundEnable: true, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
+                }
             }
 		}
 		if(mp3 !== null) {
