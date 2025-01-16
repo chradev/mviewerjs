@@ -72,6 +72,20 @@
         </div>
 	</body>
 	<script>
+		var xmlHttp = null;
+		var title = getParameterByName('title');
+		var file  = getParameterByName('file');
+		var mp3   = getParameterByName('mp3');
+		var stt   = getParameterByName('stt');
+		var pMode = getParameterByName('pMode');
+		var pTime = getParameterByName('pTime');
+
+        var fileName = '';
+        var fileExt  = '';
+        var mp3Name  = '';
+        var mp3Ext   = '';
+        var player;
+
 		function getParameterByName(name) {
 			var url = window.location.href;
 			var regex = new RegExp("[?&]" + name.replace(/[\[\]]/g, "\\$&") + "(=([^&#]*)|&|#|$)");
@@ -81,26 +95,55 @@
 			return decodeURIComponent(results[2].replace(/\+/g, " "));
 		}
 
-		var xmlHttp = null;
-		var title = getParameterByName('title');
-		var file  = getParameterByName('file');
-		var mp3   = getParameterByName('mp3');
-		var stt   = getParameterByName('stt');
-		var pMode = getParameterByName('pMode');
-		var pTime = getParameterByName('pTime');
+        function printNote() {
+       	  var noteElement = document.getElementById('note');
+          noteElement.innerHTML = '';
+          if (fileExt.toLowerCase() === 'pdf' || (fileExt.toLowerCase() === 'md' && mp3 !== null)) {
+              noteElement.innerHTML += '&nbsp;&nbsp;<b>Showing: </b>' + fileName + '.' + fileExt;
+          } 
+          if(mp3 !== null) {
+            noteElement.innerHTML += '<br>&nbsp;&nbsp;<b>Playing: </b>' + mp3Name + '.' + mp3Ext;
+            if (mp3Ext.toLowerCase() === 'mid') {
+                  noteElement.innerHTML += ' (' + msToTime(player.durationMS()) + ')';
+            }
+          }
+          if (fileExt.toLowerCase() === 'pdf') {
+            if (mp3 === null) {
+              noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book.";
+            } else {
+              noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book and/or the music.";
+            }
+          }
+        }
 
-		if(title !== null) { document.title = title;}
-    	var noteElement = document.getElementById('note');
+        function formatByteSize(bytes) {
+            if(bytes < 1024) return bytes + " B";
+            else if(bytes < 1048576) return(bytes / 1024).toFixed(1) + " kB";
+            else if(bytes < 1073741824) return(bytes / 1048576).toFixed(1) + " MB";
+            else return(bytes / 1073741824).toFixed(1) + " GB";
+        }
+
+        function msToTime(duration) {
+          var milliseconds = Math.floor((duration % 1000) / 100),
+            seconds = Math.floor((duration / 1000) % 60),
+            minutes = Math.floor((duration / (1000 * 60)) % 60),
+            hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+          hours = (hours < 10) ? "0" + hours : hours;
+          minutes = (minutes < 10) ? "0" + minutes : minutes;
+          seconds = (seconds < 10) ? "0" + seconds : seconds;
+          return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+        }
+
+		if (title !== null) { document.title = title; }
 		if(file !== null) {
-			var fileName = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'));
-			var fileExt = file.substring(file.lastIndexOf('.') + 1);
+			fileName = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'));
+			fileExt = file.substring(file.lastIndexOf('.') + 1);
 
             if (fileExt === 'md') {
         		if(window.XMLHttpRequest) {
         			// code for IE7+, Firefox, Chrome, Opera, Safari
         			xmlHttp = new XMLHttpRequest();
-        		}
-        		else {
+        		} else {
         			// code for IE6, IE5
         			xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
         		}
@@ -113,6 +156,7 @@
         				var strapDownScriptElement = document.createElement('script');
         				strapDownScriptElement.setAttribute('src', './libs/markdown/strapdown.js');
         				document.head.appendChild(strapDownScriptElement);
+
         			}
         		};
         		xmlHttp.open('GET', file + '?' + new Date().getTime(), true);
@@ -124,6 +168,8 @@
   				var strapDownScriptElement = document.createElement('script');
   				strapDownScriptElement.setAttribute('src', './libs/dflip/js/dflip.min.js');
   				document.head.appendChild(strapDownScriptElement);
+
+                var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
             }
 		}
 		if(mp3 !== null) {
@@ -131,14 +177,16 @@
 			mp3Ext = mp3.substring(mp3.lastIndexOf('.') + 1);
 
 			var audioElement = document.getElementById('audio');
-            if (mp3Ext === 'mp3') {
+            if (mp3Ext.toLowerCase() === 'mp3') {
                 audioElement.style.display = '';
 
                 // add sources to audio element - ready for multifile use case
   				audoSourceElement = document.createElement('source'); 
   				audoSourceElement.setAttribute('class', 'active');
   				audoSourceElement.setAttribute('type', 'audio/mpeg');
-                var mp3Source = stt ? mp3 + '#t=' + stt : mp3;
+  				audoSourceElement.crossOrigin = "anonymous";
+                var mp3Source = mp3;
+                if (stt) { mp3Source += '#t=' + stt; }
   				audoSourceElement.setAttribute('src', mp3Source);
   				audioElement.appendChild(audoSourceElement);
 
@@ -154,11 +202,7 @@
                   audioElement.play();
                 })
 
-                var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
-                noteElement.innerHTML = '&nbsp;&nbsp;<b>' + mp3Name + "</b>";
-                if (file !== null) {
-                    noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book and/or the music.";
-                } else {
+                if (file === null) {
        				var visualizerElement = document.getElementById('visualizer');
                     visualizerElement.style.display = '';
 
@@ -172,17 +216,17 @@
                     // create audioMotion instance and use the audio element as source
                     audioMotion = new AudioMotionAnalyzer( visualizerElement, {
                     	source: audioElement,
-                        radial: true, radialInvert: false, radius: 0.5,
+                        radial: true, radialInvert: false, radius: 0.4, spinSpeed: 0,
                     	// set your preferred options here
                     });
                 }
-            } else if (mp3Ext === 'mid') {
+            } else if (mp3Ext.toLowerCase() === 'mid') {
    				var midiPlayerElement = document.getElementById('midiplayer');
                 midiPlayerElement.style.display = '';
                 // Create MIDI player
                 JZZ.synth.Tiny.register('Web Audio');
                 var out = new JZZ().openMidiOut();
-                var player = new JZZ.gui.Player({at: 'midiplayer', midi: false, file: true, link: false });
+                player = new JZZ.gui.Player({at: 'midiplayer', midi: false, file: true, link: false });
                 // Load MIDI file and start playing
                 try {
                   var xhttp = new XMLHttpRequest();
@@ -216,13 +260,10 @@
                   xhttp.overrideMimeType('text/plain; charset=x-user-defined');
                   xhttp.open('GET', mp3, true);
                   xhttp.send();
-                }
-                catch (e) {
+                } catch (e) {
                     console.log('XMLHttpRequest error');
                 }
-                if (file !== null) {
-                    var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
-                } else { // no PDF or MD file
+                if (file === null) {
        				var staffElement = document.getElementById('staff');
                     staffElement.style.display = '';
                     // Create 16 interactive keyboards and connect them to MIDI player
@@ -286,47 +327,9 @@
                     printNote();
                     player.play();
                 }
-
-                function printNote() {
-                  let fileMIDI = player.fileInput.files[0];
-                  let msg = '';
-                  if (fileMIDI) {
-                    msg = fileMIDI.name.substring(0, fileMIDI.name.lastIndexOf('.')) + ' (' + formatByteSize(fileMIDI.size) + ')'  + ' - duration: ';
-                  } else {
-                    msg = mp3Name + ' - duration: ';
-                  }
-                  noteElement.innerHTML = '&nbsp;&nbsp;<b>' + msg + msToTime(player.durationMS()) + '</b>';
-                  if (file !== null) {
-                      var option_df_manual_book = {soundEnable: false, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
-                      noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book and/or the music.";
-                  }
-                }
-
-                function formatByteSize(bytes) {
-                    if(bytes < 1024) return bytes + " B";
-                    else if(bytes < 1048576) return(bytes / 1024).toFixed(1) + " kB";
-                    else if(bytes < 1073741824) return(bytes / 1048576).toFixed(1) + " MB";
-                    else return(bytes / 1073741824).toFixed(1) + " GB";
-                };
-
-                function msToTime(duration) {
-                  var milliseconds = Math.floor((duration % 1000) / 100),
-                    seconds = Math.floor((duration / 1000) % 60),
-                    minutes = Math.floor((duration / (1000 * 60)) % 60),
-                    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-                  hours = (hours < 10) ? "0" + hours : hours;
-                  minutes = (minutes < 10) ? "0" + minutes : minutes;
-                  seconds = (seconds < 10) ? "0" + seconds : seconds;
-                  return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-                }
-            } else {
-                var option_df_manual_book = {soundEnable: true, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
-                noteElement.innerHTML = "&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book";
             }
-		} else if (fileExt === 'pdf') {
-            var option_df_manual_book = {soundEnable: true, pageMode: pMode, singlePageMode: 2, autoPlay: true, autoPlayDuration: pTime, autoPlayStart: true };
-            noteElement.innerHTML = "&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book.";
         }
+        printNote();
 		document.getElementById('loading').style.display = 'none';
 	</script>
 </html>
