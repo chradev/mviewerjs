@@ -80,12 +80,12 @@
 		var pMode = getParameterByName('pMode');
 		var pTime = getParameterByName('pTime');
 
-        var fileName = '';
-        var fileExt  = '';
-        var mp3Name  = '';
-        var mp3Ext   = '';
-        var player;
-
+	        var fileName = '';
+	        var fileExt  = '';
+	        var mp3Name  = '';
+	        var mp3Ext   = '';
+	        var player;
+	
 		function getParameterByName(name) {
 			var url = window.location.href;
 			var regex = new RegExp("[?&]" + name.replace(/[\[\]]/g, "\\$&") + "(=([^&#]*)|&|#|$)");
@@ -94,45 +94,52 @@
 			if(results[2] === '') { return null; }
 			return decodeURIComponent(results[2].replace(/\+/g, " "));
 		}
-
-        function printNote() {
-       	  var noteElement = document.getElementById('note');
-          noteElement.innerHTML = '';
-          if (fileExt.toLowerCase() === 'pdf' || (fileExt.toLowerCase() === 'md' && mp3 !== null)) {
-              noteElement.innerHTML += '&nbsp;&nbsp;<b>Showing: </b>' + fileName + '.' + fileExt;
-          } 
-          if(mp3 !== null) {
-            noteElement.innerHTML += '<br>&nbsp;&nbsp;<b>Playing: </b>' + mp3Name + '.' + mp3Ext;
-            if (mp3Ext.toLowerCase() === 'mid') {
-                  noteElement.innerHTML += ' (' + msToTime(player.durationMS()) + ')';
-            }
-          }
-          if (fileExt.toLowerCase() === 'pdf') {
-            if (mp3 === null) {
-              noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book.";
-            } else {
-              noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book and/or the music.";
-            }
-          }
-        }
-
-        function formatByteSize(bytes) {
-            if(bytes < 1024) return bytes + " B";
-            else if(bytes < 1048576) return(bytes / 1024).toFixed(1) + " kB";
-            else if(bytes < 1073741824) return(bytes / 1048576).toFixed(1) + " MB";
-            else return(bytes / 1073741824).toFixed(1) + " GB";
-        }
-
-        function msToTime(duration) {
-          var milliseconds = Math.floor((duration % 1000) / 100),
-            seconds = Math.floor((duration / 1000) % 60),
-            minutes = Math.floor((duration / (1000 * 60)) % 60),
-            hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-          hours = (hours < 10) ? "0" + hours : hours;
-          minutes = (minutes < 10) ? "0" + minutes : minutes;
-          seconds = (seconds < 10) ? "0" + seconds : seconds;
-          return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-        }
+	
+	        function printNote() {
+	       	  var noteElement = document.getElementById('note');
+	          noteElement.innerHTML = '';
+	          if (fileExt.toLowerCase() === 'pdf' || (fileExt.toLowerCase() === 'md' && mp3 !== null)) {
+	              noteElement.innerHTML += '&nbsp;&nbsp;<b>Showing: </b>' + fileName + '.' + fileExt;
+	          } 
+	          if(mp3 !== null) {
+	            if (mp3Ext.toLowerCase() === 'mid') {
+	                let fileMIDI = player.fileInput.files[0];
+	                if (fileMIDI) {
+	                    noteElement.innerHTML += '<br>&nbsp;&nbsp;<b>Playing: </b>' + fileMIDI.name;
+	                } else {
+	                    noteElement.innerHTML += '<br>&nbsp;&nbsp;<b>Playing: </b>' + mp3Name + '.' + mp3Ext;
+	                }
+	                noteElement.innerHTML += ' (' + msToTime(player.durationMS()) + ')';
+	            } else {
+	                noteElement.innerHTML += '<br>&nbsp;&nbsp;<b>Playing: </b>' + mp3Name + '.' + mp3Ext;
+	            }
+	          }
+	          if (fileExt.toLowerCase() === 'pdf') {
+	            if (mp3 === null) {
+	              noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book.";
+	            } else {
+	              noteElement.innerHTML += "<br>&nbsp;&nbsp;<b>Note: </b> For manual operation, put to pause the book and/or the music.";
+	            }
+	          }
+	        }
+	
+	        function formatByteSize(bytes) {
+	            if(bytes < 1024) return bytes + " B";
+	            else if(bytes < 1048576) return(bytes / 1024).toFixed(1) + " kB";
+	            else if(bytes < 1073741824) return(bytes / 1048576).toFixed(1) + " MB";
+	            else return(bytes / 1073741824).toFixed(1) + " GB";
+	        }
+	
+	        function msToTime(duration) {
+	          var milliseconds = Math.floor((duration % 1000) / 100),
+	            seconds = Math.floor((duration / 1000) % 60),
+	            minutes = Math.floor((duration / (1000 * 60)) % 60),
+	            hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+	          hours = (hours < 10) ? "0" + hours : hours;
+	          minutes = (minutes < 10) ? "0" + minutes : minutes;
+	          seconds = (seconds < 10) ? "0" + seconds : seconds;
+	          return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+	        }
 
 		if (title !== null) { document.title = title; }
 		if(file !== null) {
@@ -330,6 +337,6 @@
             }
         }
         printNote();
-		document.getElementById('loading').style.display = 'none';
+	document.getElementById('loading').style.display = 'none';
 	</script>
 </html>
