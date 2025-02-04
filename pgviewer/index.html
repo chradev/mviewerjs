@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title>APOS the theory, its ACE implementation, S.T.E.A.M. the paradigm, and What is missing?</title>
+        <meta charset="utf-8">
+		<link rel="shortcut icon" type="image/icon" href="favicon.ico">
+
+        <!-- React DOM, Babel, d3, n-points-equilateral-polygon and koch-curve-iterator libraries and viewer -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.7.0/umd/react.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.7.0/umd/react-dom.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+        <script type="text/babel" src="./pgviewer-koch.js"></script>
+        <script src="./n-points-equilateral-polygon.js"></script>
+        <script src="./koch-curve-iterator.js"></script>
+<!--    Simple poligon viewer staff (w/o koch-curve-iterator) 
+        <script type="text/babel" src="./pgviewer-simple.js?"></script>
+        <script src="random-regular-polygon.js?"></script>
+-->
+        <!-- Markdown library and viewer (index.md by default) -->
+    	<script src="mdviewer.js"></script>
+        <style>
+          #cont {
+              bottom: 0; right: 0;
+              position: fixed;
+          }
+          #root {
+              margin: 0px; padding: 0px;
+              width: 200px; height: 260px;
+          }
+          #text {
+              margin: 0; padding: 0;
+              bottom: 0; width: 100%; 
+              height: 110px; position: fixed;
+          }
+          line {
+            transition: opacity linear 0.2s;
+          }
+          // Note: some of the styles should be described in the tag style attribute!
+        </style>
+      </head>
+  <body>
+    <!-- Staff to show Marckdouwn content -->
+	<div style="display: inline-block; position: fixed; top: 0; bottom: 0; left: 0; right: 0; width: 200px; height: 100px; margin: auto; font-size: 22px; font-weight: bold;" id="loading">Loading ...</div>
+	<textarea theme="cerulean-chr" style="width: 100%; height: 100%;margin: 0; padding: 0;display:none; position: fixed;" id="content"></textarea>
+    <!-- Staff to draw poligon animation -->
+    <div id="cont">
+      <div id="root" title="Click to pause/resume animation!"></div>
+      <div id="text" style="font-size: 16px; font-weight: normal;">Helge von Koch fractal on<br>Equilateral n-side polygon<br>p = 2.n.r.sin(&pi; / n), n>2<br>s = n.r&sup2;.sin(2.&pi; / n) / 2</div>
+    </div>
+    <!-- Staff to play some music -->
+    <table style="padding-left: 130px;border: none; background: none; vertical-align: middle;">
+    <tr style="border: none; background: none; vertical-align: middle;">
+    <td style="margin: 0;padding: 0;border: none; background: none; vertical-align: middle;">
+        <audio id="audio" type='audio/mpeg' src="Bond, Victory.mp3" preload="auto" controls autobuffer loop autoplay></audio>
+    </td><td style="margin: 0;padding: 0;border: none; background: none; vertical-align: middle;">
+        <div id="note" style="display: none;padding-left: 10px;">Music cannot start automatically, click here to start playing!</div>
+    </td></tr></table>
+  </body>
+<!--
+/*
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+	<div style="display: inline-block; position: fixed; top: 0; bottom: 0; left: 0; right: 0; width: 200px; height: 100px; margin: auto; font-size: 22px; font-weight: bold;" id="loading">Loading ...</div>
+    <div id="content" theme="markdown/themes/cerulean-chr"></div>
+
+    var file = "index";
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+    	if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    		document.getElementById('content').innerHTML = marked.parse(xmlHttp.responseText);
+            document.getElementById('loading').style.display = 'none';
+    	}
+    };
+    xmlHttp.open('GET', file + '.md?' + new Date().getTime(), true);
+    xmlHttp.send();
+*/
+-->
+  <script>
+    // This code is required to inform the user if the sound in the browser is not allowed!
+    Audio.prototype.play = (function(play) { return function () {
+      var audio = this, args = arguments, promise = play.apply(audio, args);
+      if (promise !== undefined) {
+        promise.catch(_ => {
+          document.getElementById("note").style.display = "";
+          window.addEventListener("click", function(){play.apply(audio, args);});
+        });
+      }
+    };
+    })(Audio.prototype.play);
+    document.getElementById("audio").play();
+  </script>
+</html>
