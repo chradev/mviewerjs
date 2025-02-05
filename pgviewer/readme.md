@@ -23,4 +23,4 @@ License: Take it, use it, make it better, love it!
 
 Find demo on: 
   - <a href="https://chradev.github.io/mviewerjs/pgviewer/index-koch.html" target="_blank">Animation of equilateral polygons and Koch fractal curves</a>
-  - <a href="https://chradev.github.io/mviewerjs/pgviewer/index.html" target="_blank">Above application combined with MD viewer</a>
+  - <a href="https://chradev.github.io/mviewerjs/pgviewer/index.html" target="_blank">Above application combined with MD viewer (APOS/ACE and S.T.E.A.M.)</a>
