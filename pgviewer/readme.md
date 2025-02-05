@@ -18,7 +18,7 @@ In addition to the simple variant, the sides are replaced with Koch fractal curv
 License: Take it, use it, make it better, love it!
   
 </td><td width="30%">
-  <img src="https://github.com/chradev/mviewerjs/blob/main/pgviewer/Animation-PgKoch.webp?raw=true" alt="Animation of equilateral polygons with Koch fractal curves" width="100%">
+  <img src="https://github.com/chradev/mviewerjs/blob/main/mviewerjs/pgviewer/Animation-PgKoch.webp?raw=true" alt="Animation of equilateral polygons with Koch fractal curves" width="100%">
 </td></tr></table>
 
 Find demo on: 
