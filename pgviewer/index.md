@@ -30,8 +30,7 @@ The sequential procedures, objects and other basic aspects of the classic teachi
 - **The association** is everywhere inside us.
 - **The motivation** is the force moving everything.
 
-<table style="margin: 0;padding: 0;border: 0;background: transparent;"><tr><td style="vertical-align: top;margin: 0;padding-top:0;padding-left:0;padding-right:4;border: 0;border: 0;background: transparent;"><strong style="font-size: 0.8em;">Notes:</strong></td></strong><td style="margin: 0;padding: 0;border: 0;border: 0;background: transparent;"><span style="font-weight: normal;font-size: 0.8em;white-space: pre-wrap;">The animation in the bottom right corner is a special web application, made by HTML, CSS, JavaScript, d3, React, etc. computer technologies
-for S.T.E.A.M. based study of the Internet programming, polygons and fractal geometry in math. Click on animation to pause/resume it!</span></td></tr></table>
+<table style="width: 60%;margin: 0;padding: 0;border: 0;background: transparent;"><tr><td style="vertical-align: top;margin: 0;padding-top:0;padding-left:0;padding-right:4;border: 0;border: 0;background: transparent;"><strong style="font-size: 0.8em;">Notes:</strong></td></strong><td style="margin: 0;padding: 0;border: 0;border: 0;background: transparent;"><span style="font-weight: normal;font-size: 0.8em;white-space: pre-wrap;">The animation in the bottom right corner is a special web application, made by HTML, CSS, JavaScript, React, d3, MathJax, etc. computer technologies and techniques, for S.T.E.A.M. based teaching of the Internet programming, polygons and fractal geometry in math. Click on animation to pause/resume it. Use a double click, mouse drag, and mouse wheel to move and scale the graphics.</span></td></tr></table>
 
 
 
