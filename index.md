@@ -50,3 +50,9 @@ A special HTML / JavaScript multi-viewer <a href="https://github.com/chradev/mvi
     - <a href="./libs/ViewerJS/#../../books/pdfs/AllCases.pdf" target="_blank">"Science Engineering and Extreme Testing" by Christo Radev</a>
 
 ***Note:*** In case of problem to hear the sound, please, return back to this page and click on the link again!
+
+## Experimental staff for animation of equilateral polygons and Koch fractal curves (2025)
+
+  - <a href="./pgviewer/index-koch.html">Animation of equilateral polygons and Koch fractal curves</a>
+  - <a href="./pgviewer/index.html">Above application combined with MD viewer</a>
+
