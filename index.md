@@ -53,5 +53,9 @@ A special HTML / JavaScript multi-viewer <a href="https://github.com/chradev/mvi
 
 ## Animation of equilateral polygons and Koch fractal curves (2025)
 
+It is computed an equilateral polygon inscribed in a circle with R = 1 (D = 2). Calculated polygon is drawn on SVG using HTML, JS, d3, React DOM, etc.<br>
+In animation, the number of points is like counting forward and backward: 2 (line), 3 (triangle), 4 (quadrilateral), ..., polygon with N sides / vertices.<br>
+In addition to the simple variant, the sides are replaced with Koch fractal curves.<br>
+
   - <a href="./pgviewer/index-koch.html">Animation of equilateral polygons and Koch fractal curves</a>
   - <a href="./pgviewer/index.html">Above application combined with MD viewer (APOS/ACE and S.T.E.A.M.)</a>
