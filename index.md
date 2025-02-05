@@ -54,5 +54,4 @@ A special HTML / JavaScript multi-viewer <a href="https://github.com/chradev/mvi
 ## Animation of equilateral polygons and Koch fractal curves (2025)
 
   - <a href="./pgviewer/index-koch.html">Animation of equilateral polygons and Koch fractal curves</a>
-  - <a href="./pgviewer/index.html">Above application combined with MD viewer</a>
-
+  - <a href="./pgviewer/index.html">Above application combined with MD viewer (APOS/ACE and S.T.E.A.M.)</a>
