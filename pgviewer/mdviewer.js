@@ -30,7 +30,7 @@ xmlHttp.onreadystatechange = function() {
 	if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
 		document.getElementById('content').innerHTML = xmlHttp.responseText;
 		var strapDownScriptElement = document.createElement('script');
-		strapDownScriptElement.setAttribute('src', './markdown/strapdown.js?' + new Date().getTime());
+		strapDownScriptElement.setAttribute('src', '../libs/markdown/strapdown.js?' + new Date().getTime());
 		document.head.appendChild(strapDownScriptElement);
 		document.getElementById('loading').style.display = 'none';
 	}
