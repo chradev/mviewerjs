@@ -43,6 +43,7 @@ A special HTML / JavaScript multi-viewer <a href="https://github.com/chradev/mvi
 - More test links to watch PDF slideshow by mViewerJS and corresponding file structure:
     - <a href="./mviewerjs.html?pMode=1&pTime=2000&file=./books/pdfs/ExperianceSources.pdf&title=Big slide show">"Sources of the professional experience" dFlip book without music</a>
     - <a href="./mviewerjs.html?pMode=2&pTime=2000&file=./books/pdfs/AllCases.pdf&mp3=./books/mids/Mozart, Symphony No. 40 in g minor, Molto allegro.mid&title=Big slide show">"Science Engineering and Extreme Testing" dFlip book with MIDI sound</a>
+    - Lists of <a href="./books/pdfs/AllPDFs-mViewerJS.php">PDF</a>, <a href="./books/mp3s/AllMP3s.php">MP3</a> and <a href="./books/mids/AllMIDIs.php">MIDI</a> files played with mViewerJS
 
 
 - Test links for ViewrJS based PDF flip books (will be opened in a new tab to test the full screen slideshow):
